@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sreesruthy M S — Geospatial Portfolio</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- TopoJSON for globe -->
+  <script src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════ NAVBAR ═══════════════════════════ -->
+  <nav class="navbar navbar-expand-xl fixed-top" id="mainNav">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand fw-semibold" href="#hero">
+        <span class="brand-dot"></span>SMS
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <i class="bi bi-grid-3x3-gap text-white fs-5"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto gap-1 py-2 py-xl-0">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#background">Background</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+          <li class="nav-item"><a class="nav-link" href="#esri">ESRI Suite</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#recognition">Recognition</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+  <section id="hero" class="hero-section">
+    <div class="hero-bg-img"></div>
+    <div class="hero-overlay"></div>
+
+    <!-- Floating video reel -->
+    <div class="hero-video-reel">
+      <video autoplay muted loop playsinline>
+        <source src="pdfs/v1.webm" type="video/webm" />
+      </video>
+      <span class="reel-label">Live Preview</span>
+    </div>
+
+    <div class="hero-content container-fluid">
+      <div class="hero-tag">
+        <span class="pulse-dot"></span> Available for Projects
+      </div>
+      <h1 class="hero-name">SREESRUTHY M S<br /><em></em></h1>
+      <p class="hero-subtitle">GIS Developer &nbsp;·&nbsp; Geologist &nbsp;·&nbsp; Green Fellow &nbsp;·&nbsp; Project Associate</p>
+      <p class="hero-tagline">Mapping the world, one layer at a time</p>
+      <div class="hero-cta">
+        <a href="#about" class="btn-hero-primary">Explore Journey</a>
+        <a href="#contact" class="btn-hero-ghost">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ ABOUT ═══════════════════════════ -->
+  <section id="about" class="section-pad">
+    <div class="container-xl">
+      <div class="section-label">01 — About</div>
+      <h2 class="section-heading">Welcome to My Portfolio</h2>
+
+      <div class="row g-4 align-items-center mt-2">
+        <!-- Photo -->
+        <div class="col-lg-3 col-md-4 text-center">
+          <div class="profile-frame">
+            <img src="images/profile.jpg" alt="Sreesruthy M S" class="profile-img" />
+            <div class="profile-ring"></div>
+          </div>
+        </div>
+
+        <!-- Bio text -->
+        <div class="col-lg-5 col-md-8">
+          <div class="about-card">
+            <p class="about-text">
+              A passionate Geospatial professional with expertise in developing innovative GIS solutions using <strong>ArcGIS Pro, QGIS, GEE, ERDAS</strong> &amp; the full ESRI suite of tools. Committed to harnessing the power of geospatial technologies to support Earth Science, Environmental studies, Disaster mitigation, and data-driven decision making.
+            </p>
+            <div class="about-stats row g-3 mt-3">
+              <div class="col-4 text-center">
+                <div class="stat-num">3+</div>
+                <div class="stat-lab">Years GIS</div>
+              </div>
+              <div class="col-4 text-center">
+                <div class="stat-num">10K+</div>
+                <div class="stat-lab">POIs Mapped</div>
+              </div>
+              <div class="col-4 text-center">
+                <div class="stat-num">6+</div>
+                <div class="stat-lab">Projects</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Globe -->
+        <div class="col-lg-4 d-flex flex-column align-items-center">
+          <div class="globe-wrap position-relative">
+            <canvas id="aboutGlobe" width="300" height="300"></canvas>
+            <p class="globe-caption"><i class="bi bi-geo-alt-fill text-danger me-1"></i>Click a pin · My Journey</p>
+            <div class="globe-popup" id="globePopup">
+              <button class="globe-popup-close" id="globePopupClose"><i class="bi bi-x"></i></button>
+              <div class="globe-popup-dot"></div>
+              <p class="globe-popup-title" id="globePopupTitle"></p>
+              <p class="globe-popup-sub" id="globePopupSub"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ BACKGROUND ═══════════════════════════ -->
+  <section id="background" class="section-pad bg-dark-section">
+    <div class="container-xl">
+      <div class="section-label light">02 — Background</div>
+      <h2 class="section-heading light">My Story</h2>
+      <div class="row justify-content-center mt-4">
+        <div class="col-lg-9">
+          <div class="bg-card-premium">
+            <div class="bg-card-accent"></div>
+            <p class="bg-text">
+              Geospatial professional with a <strong>Diploma in Geoinformatics</strong> and a <strong>Master's degree in Earth Science</strong>, with 3 years of experience in GIS and a strong interest in remote sensing. Passionate about linking spatial data with environmental insights, particularly in understanding weather patterns and environmental change.
+            </p>
+            <p class="bg-text mt-3">
+              Experienced in working with the <strong>Forest Department</strong>, administrative sectors, the <strong>Wildlife Crime Control Bureau</strong>, and the <strong>State Fire Control Center</strong>. Skilled in applying GIS to real-world challenges, with project experience in wetland mapping, shoreline analysis, soil erosion assessment, and urban planning.
+            </p>
+            <div class="bg-tags mt-4">
+              <span class="bg-tag">Remote Sensing</span>
+              <span class="bg-tag">Environmental GIS</span>
+              <span class="bg-tag">Disaster Management</span>
+              <span class="bg-tag">Wildlife Conservation</span>
+              <span class="bg-tag">Climate Action</span>
+              <span class="bg-tag">Wetland Mapping</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ SKILLS ═══════════════════════════ -->
+  <section id="skills" class="section-pad">
+    <div class="container-xl">
+      <div class="section-label">03 — Technical Skills</div>
+      <h2 class="section-heading">Tools & Technologies</h2>
+
+      <!-- Category tabs -->
+      <div class="skill-tabs mt-4" id="skillTabs">
+        <button class="skill-tab active" data-cat="all">All</button>
+        <button class="skill-tab" data-cat="gis">GIS / RS</button>
+        <button class="skill-tab" data-cat="esri">ESRI Suite</button>
+        <button class="skill-tab" data-cat="dev">Dev & Data</button>
+        <button class="skill-tab" data-cat="office">Office</button>
+      </div>
+
+      <div class="row g-3 mt-3" id="skillGrid">
+
+        <!-- GIS / RS -->
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="gis">
+          <div class="skill-card"><img src="images/ArcGIs.png" alt="ArcGIS Pro"><span>ArcGIS Pro</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="gis">
+          <div class="skill-card"><img src="images/ArcMap1.jpg" alt="ArcMap"><span>ArcMap</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="gis">
+          <div class="skill-card"><img src="images/GEE.png" alt="GEE"><span>GEE</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="gis">
+          <div class="skill-card"><img src="images/QGis.png" alt="QGIS"><span>QGIS</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="gis">
+          <div class="skill-card"><img src="images/Global Mapper.png" alt="Global Mapper"><span>Global Mapper</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="gis">
+          <div class="skill-card"><img src="images/ERDAS.jpg" alt="ERDAS"><span>ERDAS</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="gis">
+          <div class="skill-card"><img src="images/Google_EarthPro.png" alt="Earth Pro"><span>Earth Pro</span></div>
+        </div>
+
+        <!-- ESRI Suite -->
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="esri">
+          <div class="skill-card"><img src="images/dashboard.png" alt="Dashboard"><span>Dashboard</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="esri">
+          <div class="skill-card"><img src="images/Experienece Builder.png" alt="Exp Builder"><span>Exp. Builder</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="esri">
+          <div class="skill-card"><img src="images/field Maps.png" alt="Field Maps"><span>Field Maps</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="esri">
+          <div class="skill-card"><img src="images/Quick capture.png" alt="Quick Capture"><span>Quick Capture</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="esri">
+          <div class="skill-card"><img src="images/story Maps.jpg" alt="Story Maps"><span>Story Maps</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="esri">
+          <div class="skill-card"><img src="images/solutions.png" alt="Solutions"><span>Solutions</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="esri">
+          <div class="skill-card"><img src="images/sites.png" alt="Sites"><span>Sites</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="esri">
+          <div class="skill-card"><img src="images/Survey123.png" alt="Survey123"><span>Survey123</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="esri">
+          <div class="skill-card"><img src="images/SceneViewer.png" alt="Scene Viewer"><span>Scene Viewer</span></div>
+        </div>
+
+        <!-- Dev & Data -->
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="dev">
+          <div class="skill-card"><img src="images/Googlecolab.png" alt="Colab"><span>Google Colab</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="dev">
+          <div class="skill-card"><img src="images/PowerBI.png" alt="PowerBI"><span>PowerBI</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="dev">
+          <div class="skill-card"><img src="images/Tableu.png" alt="Tableau"><span>Tableau</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="dev">
+          <div class="skill-card"><img src="images/R1.jpg" alt="R"><span>R</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="dev">
+          <div class="skill-card"><img src="images/python.png" alt="Python"><span>Python</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="dev">
+          <div class="skill-card"><img src="images/html.png" alt="HTML"><span>HTML</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="dev">
+          <div class="skill-card"><img src="images/CSS.png" alt="CSS"><span>CSS</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="dev">
+          <div class="skill-card"><img src="images/JS1.png" alt="JS"><span>JavaScript</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="dev">
+          <div class="skill-card"><img src="images/SQL.png" alt="SQL"><span>SQL</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="dev">
+          <div class="skill-card"><img src="images/postgresSQL.jpg" alt="PostgreSQL"><span>PostgreSQL</span></div>
+        </div>
+
+        <!-- Office -->
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="office">
+          <div class="skill-card"><img src="images/Excel.png" alt="Excel"><span>Excel</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="office">
+          <div class="skill-card"><img src="images/powerpoint.png" alt="PowerPoint"><span>PowerPoint</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="office">
+          <div class="skill-card"><img src="images/DTP.jpg" alt="DTP"><span>DTP</span></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 skill-item" data-cat="office">
+          <div class="skill-card"><img src="images/MS word.png" alt="MS Word"><span>MS Word</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ EXPERIENCE ═══════════════════════════ -->
+  <section id="experience" class="section-pad bg-dark-section">
+    <div class="container-xl">
+      <div class="section-label light">04 — Work Experience</div>
+      <h2 class="section-heading light">Professional Journey</h2>
+
+      <div class="timeline mt-5">
+
+        <div class="tl-entry">
+          <div class="tl-dot"></div>
+          <div class="tl-badge">Dec 2025 – Present</div>
+          <div class="tl-card">
+            <div class="tl-role">GIS Expert</div>
+            <div class="tl-dept"><i class="bi bi-building me-1"></i>Tamil Nadu Forest Wildlife Crime Control Bureau</div>
+            <hr class="tl-hr">
+            <p class="tl-desc">Conducted geospatial analysis of wildlife crimes across administrative levels including Circle, Range, Beat, Zone, and Reserve Forest. Contributed to social media awareness campaigns through thematic maps. Performed ground truthing for tree felling and burnt area assessments using remote sensing. Executed DGPS surveys for accurate mapping of burnt areas within reserve forests. Supported dashboard monitoring and coordinated patrolling activities using GIS-based insights.</p>
+            <div class="tl-tags">
+              <span>DGPS Survey</span><span>Burnt Area</span><span>Wildlife Crime</span><span>Dashboard</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-dot"></div>
+          <div class="tl-badge">Jul 2023 – Jul 2025</div>
+          <div class="tl-card">
+            <div class="tl-role">Chief Minister's Green Fellow</div>
+            <div class="tl-dept"><i class="bi bi-building me-1"></i>Department of Environment &amp; Climate Change, Tamil Nadu</div>
+            <hr class="tl-hr">
+            <p class="tl-desc">Supported district administration in implementing Green Tamil Nadu, Climate Change, and Wetlands Missions through GIS-based workflows using ArcGIS Survey123. Performed geospatial analysis to monitor environmental initiatives including wetlands, water conservation, and sustainable infrastructure. Developed GIS-based data inputs across 34 government departments. Applied geospatial techniques to support MPCD, MGNREGS, GTM &amp; TBGPCCR programs.</p>
+            <div class="tl-tags">
+              <span>Survey123</span><span>Wetlands</span><span>ArcGIS</span><span>Climate Action</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-dot"></div>
+          <div class="tl-badge">May 2024 – Mar 2025</div>
+          <div class="tl-card">
+            <div class="tl-role">GIS Analyst</div>
+            <div class="tl-dept"><i class="bi bi-building me-1"></i>Bellissimo Ventures Private Limited</div>
+            <hr class="tl-hr">
+            <p class="tl-desc">Delivered high-accuracy digitization of 10,000+ POIs and AOIs for European projects. Utilized GPS data and GIS analysis to improve spatial intelligence. Integrated APIs like Google Maps and Mapbox for efficient visualization. Managed workflows within a 26-member team, ensuring on-time project delivery.</p>
+            <div class="tl-tags">
+              <span>POI Digitization</span><span>Google Maps API</span><span>Mapbox</span><span>European Projects</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-dot"></div>
+          <div class="tl-badge">Mar 2023 – Jun 2023</div>
+          <div class="tl-card">
+            <div class="tl-role">Project Associate</div>
+            <div class="tl-dept"><i class="bi bi-building me-1"></i>Kerala Institute of Local Administration</div>
+            <hr class="tl-hr">
+            <p class="tl-desc">Worked on P for R project developing GIS-based maps and analytical reports. Conducted LULC mapping using ArcGIS, QGIS, ERDAS IMAGINE, and LiDAR to support local disaster planning. Performed gap analysis of LSG disaster management plans and facilitated training programs on disaster preparedness.</p>
+            <div class="tl-tags">
+              <span>LULC</span><span>LiDAR</span><span>Disaster Planning</span><span>ERDAS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-dot"></div>
+          <div class="tl-badge">Jun 2022 – Jul 2022</div>
+          <div class="tl-card">
+            <div class="tl-role">Intern</div>
+            <div class="tl-dept"><i class="bi bi-building me-1"></i>Wadia Institute of Himalayan Geology</div>
+            <hr class="tl-hr">
+            <p class="tl-desc">Focusing on geochemical sample processing and analysis under expert supervision. Gained hands-on experience with advanced instruments: SEM, XRF, XRD, and ICP-MS. Enhanced ability to integrate field-based geochemical data with GIS workflows supporting spatial analysis and environmental monitoring.</p>
+            <div class="tl-tags">
+              <span>SEM / XRF</span><span>Geochemistry</span><span>Himalayan Geology</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ EDUCATION ═══════════════════════════ -->
+  <section id="education" class="section-pad">
+    <div class="container-xl">
+      <div class="section-label">05 — Education</div>
+      <h2 class="section-heading">Academic Credentials</h2>
+
+      <div class="edu-grid mt-5">
+
+        <div class="edu-item">
+          <div class="edu-year">2022–2023</div>
+          <div class="edu-connector"><div class="edu-dot"></div><div class="edu-vline"></div></div>
+          <div class="edu-body">
+            <div class="edu-degree">Diploma in Geoinformatics &amp; Remote Sensing</div>
+            <div class="edu-uni">Center for Environment and Development</div>
+          </div>
+          <div class="edu-score">
+            <div class="edu-num">81%</div>
+            <span class="edu-pill">First Class</span>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-year">2020–2022</div>
+          <div class="edu-connector"><div class="edu-dot"></div><div class="edu-vline"></div></div>
+          <div class="edu-body">
+            <div class="edu-degree">M.Sc. Earth Science (Geology)</div>
+            <div class="edu-uni">Central University of Punjab</div>
+          </div>
+          <div class="edu-score">
+            <div class="edu-num">7.2</div>
+            <span class="edu-pill">CGPA / 10</span>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-year">2017–2020</div>
+          <div class="edu-connector"><div class="edu-dot"></div><div class="edu-vline"></div></div>
+          <div class="edu-body">
+            <div class="edu-degree">B.Sc. Geology</div>
+            <div class="edu-uni">University of Kerala</div>
+          </div>
+          <div class="edu-score">
+            <div class="edu-num">94%</div>
+            <span class="edu-pill rank">State Rank</span>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-year">2015–2017</div>
+          <div class="edu-connector"><div class="edu-dot"></div><div class="edu-vline"></div></div>
+          <div class="edu-body">
+            <div class="edu-degree">Higher Secondary — Biology Science</div>
+            <div class="edu-uni">Board of Kerala</div>
+          </div>
+          <div class="edu-score">
+            <div class="edu-num">95%</div>
+            <span class="edu-pill">First Class</span>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-year">2014–2015</div>
+          <div class="edu-connector"><div class="edu-dot"></div><div class="edu-vline"></div></div>
+          <div class="edu-body">
+            <div class="edu-degree">SSLC — Science, Mathematics &amp; More</div>
+            <div class="edu-uni">Board of Kerala</div>
+          </div>
+          <div class="edu-score">
+            <div class="edu-num">98%</div>
+            <span class="edu-pill rank">State Rank</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ ESRI SOLUTIONS ═══════════════════════════ -->
+  <section id="esri" class="section-pad bg-dark-section">
+    <div class="container-xl">
+      <div class="section-label light">06 — ESRI Suite</div>
+      <h2 class="section-heading light">My Solutions using ESRI Suite</h2>
+
+      <div class="mosaic-grid mt-4">
+
+        <div class="mosaic-card large" data-title="Application of GIS Dashboards in Forest Fire Early Warning Systems" data-sub="FSI & NRSC Satellite Data · Thematic mapping across RF, Division, Circle, Range & Beat levels" data-tag="Forest Fire Alert Monitoring">
+          <img src="images/pic1.jpeg" alt="Fire Monitoring" />
+          <div class="mosaic-overlay"></div>
+          <span class="mosaic-tag">Forest Fire Alert</span>
+          <div class="mosaic-caption">
+            <p class="mc-title">GIS Dashboards in Forest Fire Early Warning</p>
+            <p class="mc-sub">FSI &amp; NRSC Satellite Data · RF / Division / Circle / Range</p>
+          </div>
+        </div>
+
+        <div class="mosaic-card" data-title="Integrated GIS Framework for Wildlife Conflict Mitigation" data-sub="Hotspot Mapping & Predictive Mapping" data-tag="Wildlife Conflict">
+          <img src="images/wildlifeconflict.jpeg" alt="Wildlife" />
+          <div class="mosaic-overlay"></div>
+          <span class="mosaic-tag">Wildlife Conflict</span>
+          <div class="mosaic-caption">
+            <p class="mc-title">GIS Framework for Wildlife Conflict Mitigation</p>
+            <p class="mc-sub">Hotspot &amp; Predictive Mapping</p>
+          </div>
+        </div>
+
+        <div class="mosaic-card" data-title="Multi-Criteria Decision Analysis in Ecotourism using GIS" data-sub="Web GIS · Conservation Tourism" data-tag="Ecotourism">
+          <img src="images/ecotourism.jpeg" alt="Ecotourism" />
+          <div class="mosaic-overlay"></div>
+          <span class="mosaic-tag">Ecotourism</span>
+          <div class="mosaic-caption">
+            <p class="mc-title">MCDA for Ecotourism Development</p>
+            <p class="mc-sub">Web GIS · Conservation Tourism</p>
+          </div>
+        </div>
+
+        <div class="mosaic-card tall" data-title="Burnt Area Assessment" data-sub="NBR · ArcGIS Pro · MODIS Fire Data" data-tag="Post-Fire Analysis">
+          <img src="images/Burnt_area.jpeg" alt="Burnt Area" />
+          <div class="mosaic-overlay"></div>
+          <span class="mosaic-tag">Post-Fire Analysis</span>
+          <div class="mosaic-caption">
+            <p class="mc-title">Burnt Area Assessment</p>
+            <p class="mc-sub">NBR · ArcGIS Pro · MODIS</p>
+          </div>
+        </div>
+
+        <div class="mosaic-card" data-title="GIS-Based Conservation Planning for Hunting-Prone Regions" data-sub="Spatial Decision Support · Risk Zonation" data-tag="Community Hunting">
+          <img src="images/communityhunt.png" alt="Community Hunt" />
+          <div class="mosaic-overlay"></div>
+          <span class="mosaic-tag">Community Hunting</span>
+          <div class="mosaic-caption">
+            <p class="mc-title">Conservation Planning · Hunting Zones</p>
+            <p class="mc-sub">Spatial DSS · Risk Zonation</p>
+          </div>
+        </div>
+
+        <div class="mosaic-card" data-title="Conservation Planning and Analysis — TBGPCCR" data-sub="ArcGIS Enterprise · Forest Health Monitoring" data-tag="TBGPCCR">
+          <img src="images/Tbgpccr.jpeg" alt="TBGPCCR" />
+          <div class="mosaic-overlay"></div>
+          <span class="mosaic-tag">TBGPCCR</span>
+          <div class="mosaic-caption">
+            <p class="mc-title">Conservation Planning — TBGPCCR</p>
+            <p class="mc-sub">ArcGIS Enterprise · Forest Health</p>
+          </div>
+        </div>
+
+        <div class="mosaic-card" data-title="GIS Based Spatial Analysis of Tiger Mortality" data-sub="TigerWatch GIS · GeoTiger Analytics" data-tag="Tiger Mortality">
+          <img src="images/Tiger Death.png" alt="Tiger Death" />
+          <div class="mosaic-overlay"></div>
+          <span class="mosaic-tag">Tiger Mortality</span>
+          <div class="mosaic-caption">
+            <p class="mc-title">Spatial Analysis of Tiger Mortality</p>
+            <p class="mc-sub">TigerWatch GIS · GeoTiger Analytics</p>
+          </div>
+        </div>
+
+        <div class="mosaic-card" data-title="Fire Line Categorization & Survey Management" data-sub="Fire Line Mapping · Geopatrol Forms" data-tag="Fire Line Survey">
+          <img src="images/FireLine.png" alt="Fire Line" />
+          <div class="mosaic-overlay"></div>
+          <span class="mosaic-tag">Fire Line</span>
+          <div class="mosaic-caption">
+            <p class="mc-title">Fire Line Categorization &amp; Survey</p>
+            <p class="mc-sub">Fire Line Mapping · Geopatrol Forms</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ESRI Lightbox -->
+    <div class="lb-overlay" id="esriLB">
+      <div class="lb-box">
+        <button class="lb-close" id="esriLBClose"><i class="bi bi-x-lg"></i></button>
+        <img src="" alt="" class="lb-img" id="esriLBImg" />
+        <div class="lb-meta">
+          <span class="lb-tag" id="esriLBTag"></span>
+          <p class="lb-title" id="esriLBTitle"></p>
+          <p class="lb-sub" id="esriLBSub"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ PROJECTS ═══════════════════════════ -->
+  <section id="projects" class="section-pad">
+    <div class="container-xl">
+      <div class="section-label">07 — Projects</div>
+      <h2 class="section-heading">Research &amp; Field Work</h2>
+
+      <div class="row g-4 mt-2">
+
+        <div class="col-lg-4 col-md-6">
+          <div class="proj-card">
+            <div class="proj-thumb"><img src="pdfs/ps_image.png" alt="Shoreline" /></div>
+            <div class="proj-body">
+              <span class="proj-tag">Coastal GIS</span>
+              <h5 class="proj-title">Shoreline Shift — Perumathura to Kovalam (2011–2022)</h5>
+              <p class="proj-desc">Analyzes shoreline changes along the south-western coast of Kerala using GIS and remote sensing to assess coastal erosion and accretion patterns.</p>
+              <a href="pdfs/PROJECT SAMPLE-1.pdf" class="proj-btn" target="_blank"><i class="bi bi-file-earmark-pdf me-1"></i>View Report</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="proj-card">
+            <div class="proj-thumb"><img src="pdfs/ps1_image.png" alt="Urban Green" /></div>
+            <div class="proj-body">
+              <span class="proj-tag">Urban GIS</span>
+              <h5 class="proj-title">Urban Green Space Mapping in Chennai City</h5>
+              <p class="proj-desc">Mapped urban green space distribution using GIS and remote sensing to evaluate vegetation patterns and environmental sustainability in Chennai.</p>
+              <a href="pdfs/PROJECT SAMPLE-2.pdf" class="proj-btn" target="_blank"><i class="bi bi-file-earmark-pdf me-1"></i>View Report</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="proj-card">
+            <div class="proj-thumb"><img src="pdfs/ps2_image.png" alt="Soil Erosion" /></div>
+            <div class="proj-body">
+              <span class="proj-tag">RUSLE Model</span>
+              <h5 class="proj-title">Annual Soil Erosion Estimation — Leh, Ladakh (2025)</h5>
+              <p class="proj-desc">Assessed spatial distribution of annual soil erosion using the Revised Universal Soil Loss Equation to identify erosion-prone zones in fragile Himalayan terrain.</p>
+              <a href="pdfs/PROJECT SAMPLE-3.pdf" class="proj-btn" target="_blank"><i class="bi bi-file-earmark-pdf me-1"></i>View Report</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="proj-card">
+            <div class="proj-thumb"><img src="pdfs/ps4_image.png" alt="Clay Mineralogy" /></div>
+            <div class="proj-body">
+              <span class="proj-tag">Geochemistry</span>
+              <h5 class="proj-title">Clay Mineralogy — Morang River / Rajmahal Basalt</h5>
+              <p class="proj-desc">Analyzed clay mineral composition of bedload sediments to understand weathering processes within the Rajmahal Basalt catchment using mineralogical analysis.</p>
+              <a href="pdfs/PROJECT SAMPLE-4.pdf" class="proj-btn" target="_blank"><i class="bi bi-file-earmark-pdf me-1"></i>View Report</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="proj-card">
+            <div class="proj-thumb"><img src="pdfs/ps5_image.png" alt="Namakkal" /></div>
+            <div class="proj-body">
+              <span class="proj-tag">Admin GIS</span>
+              <h5 class="proj-title">District-Level Administrative Analysis — Namakkal, TN</h5>
+              <p class="proj-desc">Developed spatial inputs for District Level Project plans using ArcGIS, identifying underdeveloped and risk zones. Developed Climate Change initiatives and Green School aspects.</p>
+              <a href="pdfs/PROJECT SAMPLE-5.pdf" class="proj-btn" target="_blank"><i class="bi bi-file-earmark-pdf me-1"></i>View Report</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="proj-card">
+            <div class="proj-thumb"><img src="pdfs/ps6_image.png" alt="Petrology" /></div>
+            <div class="proj-body">
+              <span class="proj-tag">Petrology</span>
+              <h5 class="proj-title">Petrology &amp; Structure — Nellikunnummala, Kerala</h5>
+              <p class="proj-desc">Studied petrology and structural characteristics of rocks to understand geological composition and deformation patterns, contributing to regional geological interpretation.</p>
+              <a href="pdfs/PROJECT SAMPLE-6.pdf" class="proj-btn" target="_blank"><i class="bi bi-file-earmark-pdf me-1"></i>View Report</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ RECOGNITION ═══════════════════════════ -->
+  <section id="recognition" class="section-pad bg-dark-section">
+    <div class="container-xl">
+      <div class="section-label light">08 — Recognition</div>
+      <h2 class="section-heading light">Certifications &amp; Achievements</h2>
+
+      <div class="rec-strip row g-0 mt-4">
+        <!-- Left display -->
+        <div class="col-lg-6">
+          <div class="rec-display">
+            <div class="rec-frame">
+              <img src="pdfs/cert-1.png" alt="Certificate" class="rec-active-img" id="recActiveImg" />
+              <div class="rec-frame-shine"></div>
+            </div>
+            <div class="rec-meta" id="recActiveMeta">
+              <span class="rec-badge" id="recActiveTag">Government</span>
+              <h4 class="rec-cert-title" id="recActiveTitle">Chief Minister's Green Fellowship</h4>
+              <p class="rec-issuer" id="recActiveIssuer">Issued by · Govt. of Tamil Nadu</p>
+              <span class="rec-year" id="recActiveYear">2025</span>
+            </div>
+            <button class="rec-expand-btn" id="recExpandBtn">
+              <i class="bi bi-arrows-fullscreen me-1"></i>View Full
+            </button>
+          </div>
+        </div>
+
+        <!-- Right thumbs -->
+        <div class="col-lg-6">
+          <div class="rec-thumbs" id="recThumbs">
+
+            <div class="rec-thumb active" data-img="pdfs/cert-1.png" data-tag="Government" data-year="2025" data-title="Chief Minister's Green Fellowship" data-issuer="Issued by · Govt. of Tamil Nadu">
+              <div class="rec-thumb-img"><img src="pdfs/cert-1.png" alt="Green Fellowship" /></div>
+              <div class="rec-thumb-info">
+                <p class="rt-title">Chief Minister's Green Fellowship</p>
+                <p class="rt-sub">Govt. of Tamil Nadu · 2025</p>
+              </div>
+              <div class="rec-thumb-dot"></div>
+            </div>
+
+            <div class="rec-thumb" data-img="pdfs/cert-2.jpeg" data-tag="Government" data-year="2026" data-title="GEE for Water Resources" data-issuer="Issued by · National Water Academy">
+              <div class="rec-thumb-img"><img src="pdfs/cert-2.jpeg" alt="GEE" /></div>
+              <div class="rec-thumb-info">
+                <p class="rt-title">Google Earth Engine — Water Resources</p>
+                <p class="rt-sub">National Water Academy · 2026</p>
+              </div>
+              <div class="rec-thumb-dot"></div>
+            </div>
+
+            <div class="rec-thumb" data-img="pdfs/cert-3.jpeg" data-tag="NASA" data-year="2026" data-title="Fundamentals of Remote Sensing" data-issuer="Issued by · NASA">
+              <div class="rec-thumb-img"><img src="pdfs/cert-3.jpeg" alt="NASA" /></div>
+              <div class="rec-thumb-info">
+                <p class="rt-title">Fundamentals of Remote Sensing</p>
+                <p class="rt-sub">NASA · 2026</p>
+              </div>
+              <div class="rec-thumb-dot"></div>
+            </div>
+
+            <div class="rec-thumb" data-img="pdfs/cert-4.png" data-tag="Government" data-year="2025" data-title="Intro to RS & GIS using QGIS" data-issuer="Issued by · National Water Academy">
+              <div class="rec-thumb-img"><img src="pdfs/cert-4.png" alt="QGIS" /></div>
+              <div class="rec-thumb-info">
+                <p class="rt-title">Introduction to RS &amp; GIS using QGIS</p>
+                <p class="rt-sub">National Water Academy · 2025</p>
+              </div>
+              <div class="rec-thumb-dot"></div>
+            </div>
+
+            <div class="rec-thumb" data-img="pdfs/cert-5.png" data-tag="UNESCO" data-year="2026" data-title="Climate Risk Involved Decision Analysis" data-issuer="Issued by · UNESCO">
+              <div class="rec-thumb-img"><img src="pdfs/cert-5.png" alt="UNESCO" /></div>
+              <div class="rec-thumb-info">
+                <p class="rt-title">CRIDA — Climate Risk Analysis</p>
+                <p class="rt-sub">UNESCO · 2026</p>
+              </div>
+              <div class="rec-thumb-dot"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recognition Lightbox -->
+    <div class="lb-overlay" id="recLB">
+      <div class="lb-box cert-lb">
+        <button class="lb-close" id="recLBClose"><i class="bi bi-x-lg"></i></button>
+        <img src="" alt="" class="lb-img" id="recLBImg" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ GALLERY ═══════════════════════════ -->
+  <section id="gallery" class="section-pad gallery-section">
+    <div class="container-xl">
+      <div class="section-label light">09 — Gallery</div>
+      <h2 class="section-heading light">Events &amp; Ground Truthing</h2>
+
+      <div class="gallery-spotlight-wrap mt-4">
+        <div class="gallery-spot" id="galSpot">
+          <img src="pdfs/gallery-1.png" alt="" class="gal-spot-img" id="galSpotImg" />
+          <div class="gal-overlay"></div>
+          <div class="gal-caption">
+            <span class="gal-tag" id="galTag">Burnt Area Assessment</span>
+            <p class="gal-title" id="galTitle">Fire Line tracking and Burnt Area Assessment using DGPS — 2026</p>
+          </div>
+          <button class="gal-arrow gal-prev" id="galPrev"><i class="bi bi-chevron-left"></i></button>
+          <button class="gal-arrow gal-next" id="galNext"><i class="bi bi-chevron-right"></i></button>
+          <div class="gal-counter" id="galCounter">1 / 8</div>
+        </div>
+      </div>
+
+      <div class="gal-filmstrip mt-3" id="galFilmstrip">
+        <div class="gal-film active" data-index="0" data-tag="Burnt Area Assessment" data-title="Fire Line tracking and Burnt Area Assessment using DGPS — 2026">
+          <img src="pdfs/gallery-1.png" alt="Burnt Area" /><span>01</span>
+        </div>
+        <div class="gal-film" data-index="1" data-tag="Capacity Building" data-title="Conducted GIS Workshop — District Level">
+          <img src="pdfs/gallery-2.png" alt="Workshop" /><span>02</span>
+        </div>
+        <div class="gal-film" data-index="2" data-tag="Government Event" data-title="Green Tamil Nadu Mission (Environmental Science + GIS)">
+          <img src="pdfs/gallery-3.png" alt="GTM" /><span>03</span>
+        </div>
+        <div class="gal-film" data-index="3" data-tag="Fellowship" data-title="Chief Minister's Green Fellowship Program">
+          <img src="pdfs/gallery-4.png" alt="Fellowship" /><span>04</span>
+        </div>
+        <div class="gal-film" data-index="4" data-tag="Community" data-title="Capacity Building Programs under CMGFP">
+          <img src="pdfs/gallery-5.png" alt="Training" /><span>05</span>
+        </div>
+        <div class="gal-film" data-index="5" data-tag="GSI" data-title="Earth Science + GIS — Field Work">
+          <img src="pdfs/gallery-6.png" alt="Field Work" /><span>06</span>
+        </div>
+        <div class="gal-film" data-index="6" data-tag="IIHS" data-title="Energy Audit for Achieving High Performance Building">
+          <img src="pdfs/gallery-7.png" alt="Energy Audit" /><span>07</span>
+        </div>
+        <div class="gal-film" data-index="7" data-tag="Camps" data-title="Leadership Camps & Certificates of Appreciation">
+          <img src="pdfs/gallery-8.png" alt="Camps" /><span>08</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery Lightbox -->
+    <div class="lb-overlay" id="galLB">
+      <div class="lb-box">
+        <button class="lb-close" id="galLBClose"><i class="bi bi-x-lg"></i></button>
+        <img src="" alt="" class="lb-img" id="galLBImg" />
+        <p class="lb-caption" id="galLBCaption"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ SOCIAL ═══════════════════════════ -->
+  <section class="section-pad">
+    <div class="container-xl">
+      <div class="section-label">10 — Social Media</div>
+      <h2 class="section-heading">Find Me On</h2>
+
+      <div class="row g-3 mt-3 justify-content-center">
+
+        <div class="col-lg-4 col-md-6">
+          <a href="https://instagram.com/tales.of.sruthy" target="_blank" class="social-card insta">
+            <div class="sc-icon"><i class="bi bi-instagram"></i></div>
+            <div class="sc-info">
+              <div class="sc-platform">Instagram</div>
+              <div class="sc-handle">@tales.of.sruthy</div>
+              <div class="sc-desc">Personal stories &amp; nature diaries</div>
+            </div>
+            <span class="sc-badge">Follow</span>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <a href="https://github.com/SREESRUTHYMS" target="_blank" class="social-card github">
+            <div class="sc-icon"><i class="bi bi-github"></i></div>
+            <div class="sc-info">
+              <div class="sc-platform">GitHub</div>
+              <div class="sc-handle">@SREESRUTHYMS</div>
+              <div class="sc-desc">GIS scripts, Python &amp; spatial projects</div>
+            </div>
+            <span class="sc-badge">View Repos</span>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <a href="https://www.linkedin.com/in/sreesruthy-m-s-45aa15202/" target="_blank" class="social-card linkedin">
+            <div class="sc-icon"><i class="bi bi-linkedin"></i></div>
+            <div class="sc-info">
+              <div class="sc-platform">LinkedIn</div>
+              <div class="sc-handle">@sreesruthy-m-s</div>
+              <div class="sc-desc">Professional journey &amp; geospatial insights</div>
+            </div>
+            <span class="sc-badge">Connect</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ FOOTER / CONTACT ═══════════════════════════ -->
+  <footer id="contact" class="footer-section">
+    <div class="footer-bg-texture"></div>
+    <div class="container-xl">
+
+      <div class="row g-5">
+
+        <!-- Left: Brand + info -->
+        <div class="col-lg-5">
+          <div class="ft-brand-block">
+            <div class="ft-brand-label">Get in Touch</div>
+            <h2 class="ft-name">Sreesruthy M S</h2>
+            <p class="ft-role">GIS Developer · Geologist · Green Fellow · Project Associate</p>
+            <div class="ft-contacts mt-4">
+              <div class="ft-contact-item">
+                <div class="ft-icon-box mail"><i class="bi bi-envelope-fill"></i></div>
+                <div>
+                  <div class="ft-ci-label">Email</div>
+                  <div class="ft-ci-val">sruthythulasi2017@gmail.com</div>
+                </div>
+              </div>
+              <div class="ft-contact-item mt-3">
+                <div class="ft-icon-box phone"><i class="bi bi-telephone-fill"></i></div>
+                <div>
+                  <div class="ft-ci-label">Phone</div>
+                  <div class="ft-ci-val">+91 90615 88963</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Contact Form -->
+        <div class="col-lg-7">
+          <div class="contact-form-card">
+            <div class="cf-header">
+              <span class="cf-header-dot"></span>
+              <span class="cf-header-label">Send a Message</span>
+            </div>
+
+            <form id="contactForm" novalidate>
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <label class="cf-label">Name <span class="cf-req">*</span></label>
+                  <input type="text" class="cf-input" id="cfName" placeholder="Your full name" required />
+                  <div class="cf-error" id="cfNameErr">Please enter your name.</div>
+                </div>
+                <div class="col-sm-6">
+                  <label class="cf-label">Email <span class="cf-req">*</span></label>
+                  <input type="email" class="cf-input" id="cfEmail" placeholder="you@email.com" required />
+                  <div class="cf-error" id="cfEmailErr">Please enter a valid email.</div>
+                </div>
+                <div class="col-12">
+                  <label class="cf-label">Subject <span class="cf-req">*</span></label>
+                  <input type="text" class="cf-input" id="cfSubject" placeholder="What's this about?" required />
+                  <div class="cf-error" id="cfSubjectErr">Please enter a subject.</div>
+                </div>
+                <div class="col-12">
+                  <label class="cf-label">Message <span class="cf-req">*</span></label>
+                  <textarea class="cf-input cf-textarea" id="cfMessage" placeholder="Tell me more about your project or query..." required></textarea>
+                  <div class="cf-char-count" id="cfCharCount">0 / 500</div>
+                  <div class="cf-error" id="cfMessageErr">Please enter a message.</div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="cf-submit-btn" id="cfSubmit">
+                    <span class="cf-btn-text">Send Message <i class="bi bi-send ms-1"></i></span>
+                    <span class="cf-btn-loading d-none"><span class="cf-spinner"></span> Sending…</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <!-- Success state -->
+            <div class="cf-success d-none" id="cfSuccess">
+              <div class="cf-success-icon"><i class="bi bi-check-circle-fill"></i></div>
+              <h5 class="cf-success-title">Message Received!</h5>
+              <p class="cf-success-sub">Thank you for reaching out. I'll get back to you soon.</p>
+              <button class="cf-reset-btn" id="cfReset">Send Another <i class="bi bi-arrow-counterclockwise ms-1"></i></button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="ft-divider mt-5"></div>
+
+      <div class="ft-bottom row align-items-center">
+        <div class="col-md-6">
+          <p class="ft-tagline">"Mapping the world, one layer at a time"</p>
+          <p class="ft-copy">© 2026 Sreesruthy M S · All rights reserved</p>
+        </div>
+        <div class="col-md-6 text-md-end mt-3 mt-md-0">
+          <div class="ft-socials">
+            <a href="https://www.linkedin.com/in/sreesruthy-m-s-45aa15202/" target="_blank" class="ft-soc"><i class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/SREESRUTHYMS" target="_blank" class="ft-soc"><i class="bi bi-github"></i></a>
+            <a href="https://instagram.com/tales.of.sruthy" target="_blank" class="ft-soc"><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop"><i class="bi bi-chevron-up"></i></button>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
