@@ -132,7 +132,9 @@ document.getElementById('backToTop').addEventListener('click', function () {
     { lat: 30.73, lng: 79.07, label: 'Wadia Institute',        sub: 'Intern — Himalayan Geology' },
     { lat: 30.34, lng: 76.39, label: 'Central Univ Punjab',    sub: 'M.Sc. Earth Science' },
     { lat: 34.15, lng: 77.57, label: 'Leh, Ladakh',            sub: 'Soil Erosion RUSLE Project' },
-    { lat: 13.08, lng: 80.27, label: 'Chennai',                sub: 'Urban Green Space Mapping' }
+    { lat: 13.08, lng: 80.27, label: 'Chennai',                sub: 'Urban Green Space Mapping' },
+    { lat: 45.44, lng: 12.31, label: 'Venezia',                sub: 'Flood susceptibility Tool model in QGIS demo' },
+    { lat: 25.38, lng: 49.58, label: 'Al_Ahsa',                sub: 'Urban Heat Exposure Index and Hotspot Detection,POSTGIS & Dashboard' }
   ];
 
   function project(lat, lng, rot) {
