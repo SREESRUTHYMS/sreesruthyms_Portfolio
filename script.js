@@ -134,7 +134,8 @@ document.getElementById('backToTop').addEventListener('click', function () {
     { lat: 34.15, lng: 77.57, label: 'Leh, Ladakh',            sub: 'Soil Erosion RUSLE Project' },
     { lat: 13.08, lng: 80.27, label: 'Chennai',                sub: 'Urban Green Space Mapping' },
     { lat: 45.44, lng: 12.31, label: 'Venezia',                sub: 'Flood susceptibility Tool model in QGIS demo' },
-    { lat: 25.38, lng: 49.58, label: 'Al_Ahsa',                sub: 'Urban Heat Exposure Index and Hotspot Detection,POSTGIS & Dashboard' }
+    { lat: 25.38, lng: 49.58, label: 'Al_Ahsa',                sub: 'Urban Heat Exposure Index and Hotspot Detection,POSTGIS & Dashboard' },
+    { lat: 23.68, lng: 90.35, label: 'Bangladesh',             sub: 'Environmental Sustainability Decision Support System (ES-DSS): An Integrated Dashboard Using APIs, GIS, and Multi-Criteria Analysis, Bangladesh(2015-2025)' }
   ];
 
   function project(lat, lng, rot) {
