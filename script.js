@@ -123,20 +123,25 @@ document.getElementById('backToTop').addEventListener('click', function () {
   let rotation = 0, autoSpin = true, dragging = false, lastX = 0, worldData = null;
   let lastProjected = [];
 
-  const locations = [
-    { lat: 8.89,  lng: 76.61, label: 'University of Kerala',   sub: 'B.Sc. Geology — State Rank' },
-    { lat: 8.52,  lng: 76.94, label: 'CED Kerala',             sub: 'Diploma in Geoinformatics' },
-    { lat: 11.01, lng: 76.96, label: 'TN Forest Dept',         sub: 'GIS Expert — Wildlife Crime Bureau' },
-    { lat: 11.13, lng: 78.66, label: 'Green Fellowship TN',    sub: 'Dept. of Environment & Climate Change' },
-    { lat: 12.97, lng: 77.59, label: 'Bellissimo, Bangalore',  sub: 'GIS Analyst — European POI Projects' },
-    { lat: 30.73, lng: 79.07, label: 'Wadia Institute',        sub: 'Intern — Himalayan Geology' },
-    { lat: 30.34, lng: 76.39, label: 'Central Univ Punjab',    sub: 'M.Sc. Earth Science' },
-    { lat: 34.15, lng: 77.57, label: 'Leh, Ladakh',            sub: 'Soil Erosion RUSLE Project' },
-    { lat: 13.08, lng: 80.27, label: 'Chennai',                sub: 'Urban Green Space Mapping' },
-    { lat: 45.44, lng: 12.31, label: 'Venezia',                sub: 'Flood susceptibility Tool model in QGIS demo' },
-    { lat: 25.38, lng: 49.58, label: 'Al_Ahsa',                sub: 'Urban Heat Exposure Index and Hotspot Detection,POSTGIS & Dashboard' },
-    { lat: 23.68, lng: 90.35, label: 'Bangladesh',             sub: 'Environmental Sustainability Decision Support System (ES-DSS): An Integrated Dashboard Using APIs, GIS, and Multi-Criteria Analysis, Bangladesh(2015-2025)' }
-  ];
+  
+const locations = [
+  { lat: 8.89,   lng: 76.61,  label: 'University of Kerala',  sub: 'B.Sc. Geology — State Rank' },
+  { lat: 8.52,   lng: 76.94,  label: 'CED Kerala',            sub: 'Diploma in Geoinformatics' },
+  { lat: 11.01,  lng: 76.96,  label: 'TN Forest Dept',        sub: 'GIS Expert — Wildlife Crime Bureau' },
+  { lat: 11.13,  lng: 78.66,  label: 'Green Fellowship TN',   sub: 'Dept. of Environment & Climate Change' },
+  { lat: 12.97,  lng: 77.59,  label: 'Bellissimo, Bangalore', sub: 'GIS Analyst — European POI Projects' },
+  { lat: 30.73,  lng: 79.07,  label: 'Wadia Institute',       sub: 'Intern — Wadia Institute of Himalayan Geology' },
+  { lat: 30.34,  lng: 76.39,  label: 'Central Univ Punjab',   sub: 'M.Sc. Earth Science' },
+  { lat: 34.15,  lng: 77.57,  label: 'Leh, Ladakh',           sub: 'Soil Erosion RUSLE Project' },
+  { lat: 13.08,  lng: 80.27,  label: 'Chennai',               sub: 'Urban Green Space Mapping' },
+  { lat: 45.44,  lng: 12.31,  label: 'Venezia',               sub: 'Flood susceptibility Tool model in QGIS demo' },
+  { lat: 25.38,  lng: 49.58,  label: 'Al_Ahsa',               sub: 'Urban Heat Exposure Index and Hotspot Detection, POSTGIS & Dashboard' },
+  { lat: 44.31,  lng: 85.60,  label: 'Michigan',              sub: 'Waterbodies Extraction in Michigan using NDWI in GEE' },
+  { lat: 0.34,   lng: 32.58,  label: 'Kampala',               sub: 'Standardised Precipitation Index (SPI) of Kampala, Uganda; Dec 2025 to April 2026 using GEE' },
+  { lat: -15.60, lng: 28.30,  label: 'Zambezi Basin',         sub: 'Hydrodynamic Simulation using OpenLISEM, Study Area: A portion of Zambezi River Basin in Africa' },
+  { lat: -5.20,  lng: -45.39, label: 'Maranhão',              sub: 'Rainfall–Runoff Hydrological Analysis using the SCS-CN (Soil Conservation Service Curve Number) model — Maranhão, Brazil' },
+  { lat: 23.68,  lng: 90.35,  label: 'Bangladesh',            sub: 'Environmental Sustainability Decision Support System (ES-DSS): An Integrated Dashboard Using APIs, GIS, and Multi-Criteria Analysis, Bangladesh (2015–2025)' }
+];
 
   function project(lat, lng, rot) {
     const phi   = (90 - lat) * Math.PI / 180;
